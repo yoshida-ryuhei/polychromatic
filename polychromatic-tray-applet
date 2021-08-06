@@ -83,6 +83,7 @@ class Indicator(object):
         self.indicator = None
         self.root_menu = None
         self.mode = prefs["tray"]["mode"]
+        self.icon_colour = "#00FF00"
 
         # 0 will use the default, unless it is unavailable.
         if self.mode == pref.TRAY_DEFAULT:
@@ -127,6 +128,12 @@ class Indicator(object):
             self.indicator.set_visible(True)
 
         dbg.stdout("Initialised " + self.names[self.mode], dbg.success, 1)
+
+        # Determine colour to use for icons
+        style_context = Gtk.Menu().get_style_context()
+        gdk_rgba = style_context.get_color(Gtk.StateType.NORMAL) #.color
+        print(gdk_rgba)
+        self.icon_colour = common.rgb_to_hex([int(gdk_rgba.red), int(gdk_rgba.green), int(gdk_rgba.blue)])
 
     def create_menu(self):
         """
@@ -262,7 +269,7 @@ class PolychromaticTrayApplet():
         self.build_indicator()
         dbg.stdout("Finished setting up applet.", dbg.success, 1)
 
-    def _get_icon(self, img_dir, icon):
+    def _get_icon(self, folder, name):
         """
         Returns the path for a Polychromatic icon.
 
@@ -270,7 +277,9 @@ class PolychromaticTrayApplet():
             img_dir         (str)   Folder inside img, e.g. "effects"
             icon            (str)   Filename excluding the extension.
         """
-        return common.get_icon(img_dir, icon)
+        colour = indicator.icon_colour
+        icon_path = common.get_icon_styles(dbg, folder, name, colour, colour, colour, colour, colour, colour)
+        return icon_path[0] if icon_path else None
 
     def _get_tray_icon(self):
         """
