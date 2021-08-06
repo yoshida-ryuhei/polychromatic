@@ -41,7 +41,7 @@ class EffectsTab(shared.CommonFileTab):
             "import": self.import_effect
         }
 
-        self._add_tree_item(self.TasksBranch, self._("New Effect"), common.get_icon("general", "new"), "tasks", "new")
+        self._add_tree_item(self.TasksBranch, self._("New Effect"), self.get_icon("general", "new"), "tasks", "new")
         # FIXME: Not yet implemented: Import Effect
         #self._add_tree_item(self.TasksBranch, self._("Import Effect"), common.get_icon("general", "import"), "tasks", "import")
 
@@ -294,7 +294,7 @@ class EffectsTab(shared.CommonFileTab):
 
         # -- Author
         if data["author"]:
-            indicators.append({"icon": common.get_icon("effects", "author"), "label": data["author"]})
+            indicators.append({"icon": self.get_icon("effects", "author"), "label": data["author"]})
 
         # -- Effect Type
         effect_type = data["type"]
@@ -308,13 +308,13 @@ class EffectsTab(shared.CommonFileTab):
             effects.TYPE_SCRIPTED: "scripted-small",
             effects.TYPE_SEQUENCE: "sequence",
         }
-        indicators.append({"icon": common.get_icon("effects", effect_type_icon[effect_type]), "label": effect_type_name[effect_type]})
+        indicators.append({"icon": self.get_icon("effects", effect_type_icon[effect_type]), "label": effect_type_name[effect_type]})
 
         # -- Device
         if data["map_device"]:
-            device_icon = common.get_icon("devices", data["map_device_icon"])
+            device_icon = self.get_icon("devices", data["map_device_icon"])
             if not device_icon:
-                device_icon = common.get_icon("devices", "accessory")
+                device_icon = self.get_icon("devices", "accessory")
             indicators.append({"icon": device_icon, "label": data["map_device"]})
 
         # Create the summary widget

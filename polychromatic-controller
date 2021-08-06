@@ -114,6 +114,16 @@ class ApplicationData(object):
         self.system_qt_theme = self.preferences["controller"]["system_qt_theme"]
         self.show_menu_bar = self.preferences["controller"]["show_menu_bar"]
 
+        # Use native colours instead (used for colouring icons)
+        if self.system_qt_theme:
+            palette = QWidget().palette()
+            self.normal_colour = palette.text().color().name()
+            self.disabled_colour = palette.dark().color().name()
+            self.active_colour = palette.text().color().name()
+            self.selected_colour = palette.text().color().name()
+            self.secondary_colour_active = palette.text().color().name()
+            self.secondary_colour_inactive = palette.text().color().name()
+
     def load(self):
         """
         Show the main window and spawn a thread to load the rest of the application.

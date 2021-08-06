@@ -284,6 +284,17 @@ class TabData(object):
         layout.addStretch()
         return widget
 
+    def get_icon(self, folder, name):
+        """
+        Alias to common.get_icon_styles passing the required parameters, and
+        returning the first icon.
+        """
+        styles = common.get_icon_styles(self.dbg, folder, name, self.appdata.normal_colour, self.appdata.disabled_colour, self.appdata.active_colour,
+            self.appdata.selected_colour, self.appdata.secondary_colour_active, self.appdata.secondary_colour_inactive)
+        if styles:
+            return styles[0]
+        return None
+
 
 class PolychromaticWidgets(object):
     """

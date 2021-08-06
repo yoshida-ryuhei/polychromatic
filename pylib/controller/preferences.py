@@ -204,7 +204,7 @@ class PreferencesWindow(shared.TabData):
             backend_label.setText(label)
 
             backend_status_icon = self.dialog.findChild(QLabel, "Status_" + backend + "_icon")
-            shared.set_pixmap_for_label(backend_status_icon, common.get_icon("general", icon), 24)
+            shared.set_pixmap_for_label(backend_status_icon, self.get_icon("general", icon), 24)
 
     def _load_option(self, group, item, qcontrol, qid, inverted):
         """

@@ -383,7 +383,7 @@ class DevicesTab(shared.TabData):
         combo = QComboBox()
         combo.setIconSize(QSize(16, 16))
         for i, param in enumerate(params):
-            icon_path = common.get_icon("params", param["id"])
+            icon_path = self.get_icon("params", param["id"])
             combo.addItem(param["label"])
 
             if icon_path:
@@ -452,7 +452,7 @@ class DevicesTab(shared.TabData):
             button.setCheckable(True)
             button.setIconSize(QSize(40, 40))
             button.setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
-            button.setIcon(QIcon(common.get_icon("options", fx_id)))
+            button.setIcon(QIcon(self.get_icon("options", fx_id)))
             button.setMinimumHeight(70)
             button.setMinimumWidth(105)
             button.effect = effect
@@ -532,7 +532,7 @@ class DevicesTab(shared.TabData):
                 if param["active"]:
                     radio.setChecked(True)
 
-                icon = common.get_icon("params", param["id"])
+                icon = self.get_icon("params", param["id"])
                 if icon:
                     radio.setIcon(QIcon(icon))
                     radio.setIconSize(QSize(22, 22))
@@ -947,7 +947,7 @@ class DevicesTab(shared.TabData):
                 option_id = brightness["id"]
                 option_data = brightness["data"]
                 label = brightness["label"]
-                icon = common.get_icon("options", str(option_data))
+                icon = self.get_icon("options", str(option_data))
                 widgets.append(_create_button(label, icon, option_id, option_data))
 
             add_to_page(self._("Brightness"), widgets)
@@ -960,7 +960,7 @@ class DevicesTab(shared.TabData):
                 option_data = option["data"]
                 required_colours = option["required_colours"]
                 label = option["label"]
-                icon = common.get_icon("options", str(option_id))
+                icon = self.get_icon("options", str(option_id))
                 widgets.append(_create_button(label, icon, option_id, option_data, option_colours=required_colours))
 
             add_to_page(self._("Effects"), widgets)
@@ -1016,10 +1016,10 @@ class DevicesTab(shared.TabData):
                 elif type(value) == bool:
                     if value == True:
                         item.setText(1, _("Yes"))
-                        item.setIcon(1, QIcon(common.get_icon("general", "success")))
+                        item.setIcon(1, QIcon(self.get_icon("general", "success")))
                     else:
                         item.setText(1, _("No"))
-                        item.setIcon(1, QIcon(common.get_icon("general", "negative")))
+                        item.setIcon(1, QIcon(self.get_icon("general", "negative")))
                 if disabled:
                     item.setDisabled(True)
                 if icon:
@@ -1049,7 +1049,7 @@ class DevicesTab(shared.TabData):
             if device["matrix"]:
                 dimensions = common.get_plural(device["matrix_rows"], _("1 row"), _("2 rows").replace("2", str(device["matrix_rows"])))
                 dimensions += ", " + common.get_plural(device["matrix_cols"], _("1 column"), _("2 columns").replace("2", str(device["matrix_cols"])))
-                cfx.addChild(mkitem(_("Matrix Dimensions"), dimensions, common.get_icon("general", "matrix")))
+                cfx.addChild(mkitem(_("Matrix Dimensions"), dimensions, self.get_icon("general", "matrix")))
                 btn_test_matrix.setDisabled(False)
             tree.addTopLevelItem(cfx)
 
