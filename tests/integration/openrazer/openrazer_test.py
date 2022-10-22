@@ -65,6 +65,7 @@ class OpenRazerMiddlemanTest(unittest.TestCase):
         """
         output = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
         if str(output).find("Traceback") != -1:
+            print(str(output))
             return True
         return False
 
