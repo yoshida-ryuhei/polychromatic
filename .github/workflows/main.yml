@@ -147,7 +147,7 @@ jobs:
 
     - name: Install python package dependencies
       run: |
-        python -m pip install colorama color requests setproctitle pyqt5
+        python -m pip install colorama git+https://github.com/vaab/colour requests setproctitle pyqt5
 
     - name: Install OpenRazer Backend
       run: |
